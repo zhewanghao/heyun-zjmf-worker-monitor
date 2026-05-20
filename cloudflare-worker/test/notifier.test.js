@@ -48,3 +48,24 @@ test('pushplus webhook 发送 token/title/content/template', async () => {
     template: 'txt',
   });
 });
+
+test('企业微信机器人 webhook 发送 text 消息', async () => {
+  const calls = [];
+  const fetcher = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return new Response('{"errcode":0}', { status: 200 });
+  };
+  const notifier = new Notifier({
+    webhook_url: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=abc',
+    webhook_type: 'wecom',
+  }, fetcher);
+
+  const result = await notifier.send('服务器告警', '主服务器 DOWN', 'critical');
+  assert.equal(result.ok, true);
+  assert.deepEqual(JSON.parse(calls[0].init.body), {
+    msgtype: 'text',
+    text: {
+      content: '服务器告警\n主服务器 DOWN',
+    },
+  });
+});

@@ -16,6 +16,14 @@ function payloadFor(settings, title, message, level, nowSeconds) {
       template: 'txt',
     };
   }
+  if (settings.webhook_type === 'wecom') {
+    return {
+      msgtype: 'text',
+      text: {
+        content: `${title}\n${message}`,
+      },
+    };
+  }
   return { title, message, level, timestamp: nowSeconds() };
 }
 
