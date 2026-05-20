@@ -16,7 +16,7 @@ function payloadFor(settings, title, message, level, nowSeconds) {
       template: 'txt',
     };
   }
-  if (settings.webhook_type === 'wecom') {
+  if (settings.webhook_type === 'wecom' || settings.webhook_type === 'dingtalk') {
     return {
       msgtype: 'text',
       text: {
