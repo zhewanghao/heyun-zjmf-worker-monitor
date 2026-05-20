@@ -86,7 +86,7 @@ test('钉钉机器人 webhook 发送 text 消息', async () => {
   assert.deepEqual(JSON.parse(calls[0].init.body), {
     msgtype: 'text',
     text: {
-      content: '服务器告警\n主服务器 DOWN',
+      content: 'ZJMF 监控通知\n服务器告警\n主服务器 DOWN',
     },
   });
 });

@@ -16,11 +16,19 @@ function payloadFor(settings, title, message, level, nowSeconds) {
       template: 'txt',
     };
   }
-  if (settings.webhook_type === 'wecom' || settings.webhook_type === 'dingtalk') {
+  if (settings.webhook_type === 'wecom') {
     return {
       msgtype: 'text',
       text: {
         content: `${title}\n${message}`,
+      },
+    };
+  }
+  if (settings.webhook_type === 'dingtalk') {
+    return {
+      msgtype: 'text',
+      text: {
+        content: `ZJMF 监控通知\n${title}\n${message}`,
       },
     };
   }
